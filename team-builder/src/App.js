@@ -1,56 +1,26 @@
 import React, { useState } from "react";
-import "./App.css";
+import Create from "./Components/Create";
+import Note from "./Components/Note";
+
 
 function App() {
-  const [user, setUser] = useState({ name: "", email: "", role: "" });
-
-  const handleChange = event => {
-    setUser({ ...user, [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    setUser({name: '', email: '', role: ''});
-    console.log(user.name);
-    console.log(user.password);
-  };
+  const [notes, setNotes] = useState([
+    {
+      memberName: "Angela Williams",
+      email:
+        "Angel_Legato@icloud.com",
+        role: "Front End Developer"
+    }
+  ]);
 
   return (
     <div className="App">
-      {console.log(user)}
-      <form onSubmit={event => handleSubmit(event)}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={user.name}
-            onChange={event => handleChange(event)}
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="text"
-            name="email"
-            value={user.email}
-            onChange={event => handleChange(event)}
-          />
-        </label>
-        <label>
-          Role:
-          <input
-            type="text"
-            name="role"
-            value={user.role}
-            onChange={event => handleChange(event)}
-          />
-        </label>
-        <button>Submit!</button>
-      </form>
+      <h1>Team Member List</h1>
+
+      <Create notes={notes} setNotes={setNotes} />
+      <Note notes={notes} />
     </div>
   );
 }
 
 export default App;
-

@@ -1,48 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Create = props => {
-  const initialNote = { title: "", body: "" };
-  const [newNote, setNewNote] = useState(initialNote);
-
-  const handleChange = event => {
-    setNewNote({
-      ...newNote,
-      [event.target.name]: event.target.value
-    });
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    if (!newNote.title || !newNote.body) {
-      alert("Please fill out both fields!");
-    } else {
-      props.setNotes([newNote, ...props.notes]);
-      resetForm();
-    }
-  };
-
-  const resetForm = () => {
-    setNewNote(initialNote);
-  };
-
+function Note(props) {
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="title"
-        placeholder="Title"
-        onChange={handleChange}
-        value={newNote.title}
-      />
-      <textarea name="body" onChange={handleChange} value={newNote.body} />
-
-      <button type="submit">Submit</button>
-      <button type="button" onClick={resetForm}>
-        Reset
-      </button>
-    </form>
+    <>
+      {props.notes.map((note, index) => (
+        <div className="note" key={index}>
+          <h2>{note.memberName}</h2>
+          <p>{note.email}</p>
+          <p>{note.role}</p>
+        </div>
+      ))}
+    </>
   );
-};
+}
 
-export default Create;
+export default Note;
